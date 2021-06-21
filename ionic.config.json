@@ -1,0 +1,8 @@
+{
+  "name": "CryptoMarket",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue",
+  "id": "8c73d8b0"
+}
