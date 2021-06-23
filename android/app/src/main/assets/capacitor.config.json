@@ -1,0 +1,6 @@
+{
+	"appId": "io.ionic.starter",
+	"appName": "CryptoMarket",
+	"webDir": "dist",
+	"bundledWebRuntime": false
+}
