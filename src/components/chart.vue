@@ -8,7 +8,6 @@
 import { defineComponent, PropType } from 'vue'
 
 import VueApexCharts from "vue3-apexcharts";
-import ApexChart from 'apexcharts';
 
 export default defineComponent({
     name: 'Chart',
@@ -65,13 +64,6 @@ export default defineComponent({
                 },
             }
         }
-    },
-    methods: {
-        setZoom() {
-
-            const {start, end} = this.zoom;
-            ApexChart.exec("market", "zoomX", new Date(start).getTime(), new Date(end).getTime());
-        },
     },
 })
 </script>

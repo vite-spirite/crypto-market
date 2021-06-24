@@ -1,27 +1,31 @@
 <template>
     <ion-page>
-        <ion-tabs>
-            <ion-tab-bar slot="bottom">
+        <ion-content>
+            <ion-tabs>
+                <ion-router-outlet></ion-router-outlet>
 
-                <ion-tab-button tab="market" href="/market">
-                    <ion-icon :icon="analyticsOutline"></ion-icon>
-                    <ion-label>Marché</ion-label>
-                </ion-tab-button>
+                <ion-tab-bar slot="bottom">
 
-                <ion-tab-button tab="favorite" href="/favorite">
-                    <ion-icon :icon="starOutline"></ion-icon>
-                    <ion-label>Favoris</ion-label>
-                </ion-tab-button>
+                    <ion-tab-button tab="market" href="/market">
+                        <ion-icon :icon="analyticsOutline"></ion-icon>
+                        <ion-label>Marché</ion-label>
+                    </ion-tab-button>
+
+                    <ion-tab-button tab="favorite" href="/favorite">
+                        <ion-icon :icon="starOutline"></ion-icon>
+                        <ion-label>Favoris</ion-label>
+                    </ion-tab-button>
 
 
-            </ion-tab-bar>
-        </ion-tabs>
+                </ion-tab-bar>
+            </ion-tabs>
+        </ion-content>
     </ion-page>
 </template>
 
 <script lang="ts">
 import { loadingController } from '@ionic/vue';
-import { IonIcon, IonTabBar, IonTabButton, IonTabs, IonPage, IonLabel } from '@ionic/vue';
+import { IonIcon, IonTabBar, IonTabButton, IonTabs, IonPage, IonLabel, IonRouterOutlet, IonContent } from '@ionic/vue';
 
 import { defineComponent } from 'vue'
 
@@ -35,7 +39,7 @@ type homeData = {
 
 export default defineComponent({
     name: "home",
-    components: { IonIcon, IonTabBar, IonTabButton, IonTabs, IonPage, IonLabel },
+    components: { IonIcon, IonTabBar, IonTabButton, IonTabs, IonPage, IonLabel, IonRouterOutlet, IonContent },
     data: (): homeData => ({
         loader: undefined,
     }),

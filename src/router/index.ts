@@ -5,22 +5,28 @@ import home from '@/views/home.vue';
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
+    name: 'index',
     component: home,
     redirect: '/market',
     children: [
       {
+        path: '',
+        redirect: '/market',
+      },
+      {
         path: "market/",
         component: () => import('@/views/market.vue'),
-        children: [
-          {
-            path: ':asset',
-            component: () => import('@/views/asset.vue'),
-          }
-        ]
+        name: 'market',
+      },
+      {
+        path: 'market/asset/:asset',
+        name: 'market.asset',
+        component: () => import('@/views/asset.vue'),
       },
       {
         path: "favorite",
         component: () => import('@/views/favorite.vue'),
+        name: 'favorite',
       }
     ]
   },

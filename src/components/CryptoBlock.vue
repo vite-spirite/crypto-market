@@ -1,9 +1,10 @@
 <template>
-    <div class='crypto-wrapper' @click='clickWrapper'>
+    <div class='crypto-wrapper' @click='clickWrapper()'>
         <div class='crypto'>
             <div class='crypto-info'>
-                <ion-button fill="clear" @click.stop="clickFavorite">
-                    <ion-icon :icon='starOutline'></ion-icon>
+                <ion-button fill="clear" @click.stop="clickFavorite()">
+                    <ion-icon v-if='!favorite' :icon='starOutline'></ion-icon>
+                    <ion-icon v-else :icon='star'></ion-icon>
                 </ion-button>
 
                 <ion-title size="large">{{name}}</ion-title>
@@ -19,8 +20,12 @@
 <script lang="ts">
 import { defineComponent, PropType } from 'vue'
 import {IonText, IonTitle, IonIcon, IonButton} from '@ionic/vue'
-import {starOutline} from 'ionicons/icons'
+import {starOutline, star} from 'ionicons/icons'
+
+import {store} from '@/composable/storage';
+
 export default defineComponent({
+    name: 'CryptoBlock',
     components: {IonText, IonTitle, IonIcon, IonButton},
     props: {
         name: {
@@ -42,19 +47,40 @@ export default defineComponent({
         }
     },
     setup() {
-        return {starOutline}
+        const {isFavorite, addFavorite, deleteFavorite} = store();
+
+        return {
+            starOutline,
+            star,
+            isFavorite, 
+            addFavorite, 
+            deleteFavorite
+        }
     },
     methods: {
         fixeNumber(number: number, digit: number): string {
             return number.toFixed(digit);
         },
         clickWrapper(): void {
-            this.$router.push(`/market/${this.asset}`);
+            this.$router.push(`/market/asset/${this.asset}`);
         },
-        clickFavorite(event: any): void {
-            console.log('favorite');
-        }
-    }
+        async clickFavorite(): Promise<void> {
+            if(this.favorite) {
+                await this.deleteFavorite(this.asset);
+                this.favorite = false;
+            }
+            else {
+                await this.addFavorite(this.asset);
+                this.favorite = true;
+            }
+        },
+    },
+    data: () => ({
+        favorite: false,
+    }),
+    async mounted() {
+        this.favorite = await this.isFavorite(this.asset);
+    },
 })
 </script>
 
