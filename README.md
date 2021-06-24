@@ -1,4 +1,3 @@
-###CryptoMarket
+### CryptoMarket
 ---
-Application de visualisation des crypto monnaie.
-Application fonctionnant sous l'api (https://messari.io/).
+Application de visualisation des crypto monnaie, fonctionnant sous l'api (https://messari.io/).
